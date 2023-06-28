@@ -6,8 +6,6 @@ import argparse
 from templates.main_c import main_c
 from templates.shellcode_h import shellcode_h
 
-
-
 def exe_to_bin(path_to_bin: str, output_dir: str):
     """
     Uses `donut` to convert PE to binary shellcode
@@ -18,8 +16,6 @@ def exe_to_bin(path_to_bin: str, output_dir: str):
         path_to_bin (str): Path to the PE file.
         output_dir (str): Folder to store the parsed output.
     """
-
-
     outfile_name = os.path.join(output_dir, "shellcode.bin")
     donut.create(path_to_bin, output=outfile_name)
 
@@ -43,7 +39,7 @@ def to_code(file_path: str) -> str:
 def generate_template(shellcode_size) -> tuple[str, str]:
     """
     Generates the main.c and shellcode.h files.
-
+    
     Args:
         shellcode_size (_type_): Size of the shellcode in bytes.
 
@@ -92,7 +88,6 @@ def main():
 
     print("[+] All tasks completed successfully.")
     print(f"[+] Shellcode size: {bin_size} bytes.")
-    
 
 if __name__ == "__main__":
     main()

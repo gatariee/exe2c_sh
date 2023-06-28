@@ -13,13 +13,52 @@ git clone https://github.com/gatariee/exe2c_sh.git
 pip install -r requirements.txt
 ```
 
-## Donut
-You may face AV issues when installing the [donut-shellcode](https://github.com/TheWover/donut) library, add an exclusion to the folder before installing.
-
 ## Usage
 `./exe2sh.py -i <path_to_bin> -o <output_folder>`
 
-## Example Output 
+## Templates
+Shellcode generated will also automatically be passed into a loader template, located at `/template/`. These should be edited to your liking, the default template is a simple loader that will load the shellcode into memory and execute it.
+
+* [main.c](./templates/main_c.py)
+  * The main loader template, this is where the shellcode will be loaded into.
+* shellcode.c
+  * This is where the shellcode is generated and parsed to.
+* [shellcode.h](./templates/shellcode_h.py)
+  * The shellcode header template, this is where the shellcode will be defined.
+
+main.c
+```c
+#include <windows.h>
+#include "shellcode.h"
+
+int main(int argc, char *argv[]) {
+    size_t shellcode_size = [~SHELLCODE_SIZE~];
+    void *exec = VirtualAlloc(0, shellcode_size, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+    memcpy(exec, shellcode, shellcode_size);
+    ((void(*)())exec)();
+    return 0;
+}
+```
+
+shellcode.c
+```c
+unsigned char shellcode[] = {
+    [~SHELLCODE~]
+};
+```
+
+shellcode.h
+```c
+#ifndef SHELLCODE_H
+#define SHELLCODE_H
+
+extern unsigned char shellcode[];
+
+#endif
+```
+
+## Donut
+You may face AV issues when installing the [donut-shellcode](https://github.com/TheWover/donut) library, add an exclusion to the folder before installing.
 
 
 

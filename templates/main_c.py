@@ -18,7 +18,3 @@ class main_c:
         }}
         """)
         return template
-
-
-
-

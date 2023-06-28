@@ -46,7 +46,7 @@ def generate_template(shellcode_size) -> tuple[str, str]:
     Returns:
         tuple[str, str]: The string contents of the main.c and shellcode.h files.
     """
-    main_template = main_c(shellcode_size = shellcode_size)
+    main_template = main_c(shellcode_size)
     shellcode_template = shellcode_h()
     return main_template.generate(), shellcode_template.generate()
 

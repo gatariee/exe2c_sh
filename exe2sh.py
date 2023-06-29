@@ -8,8 +8,6 @@ from templates.shellcode_h import shellcode_h
 
 def exe_to_bin(path_to_bin: str, output_dir: str):
     """
-    Uses `donut` to convert PE to binary shellcode
-
     WARNING: `donut.create()` performs IO operations!
 
     Args:

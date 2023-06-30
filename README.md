@@ -8,7 +8,7 @@ It also has support for loader templates, the default output template is located
 
 ## Installation
 
-```git
+```bash
 git clone https://github.com/gatariee/exe2c_sh.git
 pip install -r requirements.txt
 ```
